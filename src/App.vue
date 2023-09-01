@@ -37,7 +37,7 @@
 					</select>
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
-					<Escolha />
+					<Escolha v-model="escolha" />
 				</Rotulo>
 				<hr>
 				<button @click.prevent="enviar">Enviar</button>
@@ -68,7 +68,7 @@
 					<span> {{ nomePrioridade(prioridade) }} </span>
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
-					<span>???</span>
+					<span> {{ escolha ? 'Sim' : 'Não' }} </span>
 				</Rotulo>
 				<button @click.prevent="voltar">Voltar</button>
 			</div>
@@ -119,7 +119,8 @@ export default {
 				email: '',
 				senha: '',
 				idade: 25
-			}
+			},
+			escolha: false,
 			enviado: false
 		}
 	},
@@ -164,7 +165,6 @@ body {
 	font-size: 1.4rem;
 }
 
-#app form button {
  button {
 	float: right;
 	margin: 10px 0px;
