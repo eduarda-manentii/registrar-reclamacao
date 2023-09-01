@@ -48,10 +48,10 @@
 					<span> {{ usuario.email }} </span>
 				</Rotulo>
 				<Rotulo nome="Senha">
-					<span>{{ usuario.senha }}</span>
+					<span v-if="usuario.senha"> {{ converterParaAsteriscos(usuario.senha) }} </span>
 				</Rotulo>
 				<Rotulo nome="Idade">
-					<span> {{ usuario.idade }} {{ tipoIdade }} </span>
+					<span> {{ usuario.idade }} </span>
 				</Rotulo>
 				<Rotulo nome="Mensagem">
 					<span> {{ mensagem }} </span>
@@ -83,9 +83,6 @@ import Escolha from './components/Escolha.vue'
 export default {
 	name: 'app',
 	components: { Rotulo, Escolha },
-	computed: {
-		tipoIdade() {
-			return typeof this.usuario.idade
 	methods: {
 		enviar() {
 			this.enviado = true
@@ -108,7 +105,7 @@ export default {
 		return {
 			mensagem: '',
 			caracteristicas: [],
-			produto: 'erb',
+			produto: ' ',
 			prioridade: 1,
 			prioridades: [
 				{ codigo: 1, nome: 'Baixa' },
