@@ -28,8 +28,12 @@
 					<span><input type="radio" value="outro" v-model="produto"> Outro</span>
 				</Rotulo>
 				<Rotulo nome="Prioridade">
-					<select name="" id="">
-						<option></option>
+					<select v-model="prioridade">
+						<option v-for="prioridade in prioridades"
+						:value="prioridade.codigo"
+						:key="prioridade.codigo">
+						{{  prioridade.codigo }} - {{  prioridade.nome }}
+						 </option>
 					</select>
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
@@ -61,7 +65,7 @@
 					<span> {{  produto }} </span>
 				</Rotulo>
 				<Rotulo nome="Prioridade">
-					<span>???</span>
+					<span> {{ nomePrioridade(prioridade) }} </span>
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
 					<span>???</span>
@@ -89,12 +93,28 @@ export default {
 		voltar() {
 			this.enviado = false
 		},
+		nomePrioridade(codigoPrioridade) {
+			const prioridade = this.prioridades.find(p => p.codigo === codigoPrioridade);
+			return prioridade ? prioridade.nome : '';
+  	},
+		converterParaAsteriscos(senha) {
+			const comprimentoSenha = senha.length;
+			const senhaAsteriscos = '*'.repeat(comprimentoSenha);
+			return senhaAsteriscos;
+  },
+
 	},
 	data() {
 		return {
 			mensagem: '',
 			caracteristicas: [],
 			produto: 'erb',
+			prioridade: 1,
+			prioridades: [
+				{ codigo: 1, nome: 'Baixa' },
+				{ codigo: 2, nome: 'Média' },
+				{ codigo: 3, nome: 'Alta' }
+			],
 			usuario: {
 				email: '',
 				senha: '',
